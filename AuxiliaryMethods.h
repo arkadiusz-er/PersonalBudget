@@ -10,7 +10,7 @@ using namespace std;
 class AuxiliaryMethods {
 public:
     static string convertIntToString(int number);
-    //static string wczytajLinie();
+    static string loadLine();
     //static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
     static int convertStringToInt(string number);
     //static char wczytajZnak();

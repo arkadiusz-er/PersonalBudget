@@ -14,7 +14,7 @@
 using namespace std;
 
 class UserManager {
-    //int idZalogowanegoUzytkownika;
+    int loggedUserId;
     vector <User> users;
 
     User giveNewUserData();
@@ -27,10 +27,11 @@ public:
     //    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
     //};
     UserManager(string fileNameWithUsers) : fileWithUsers(fileNameWithUsers) {
+        loggedUserId = 0;
         users = fileWithUsers.loadUsersFromFile();
     };
     void userRegistration();
-    //void logowanieUzytkownika();
+    void userLogging();
     //void wypiszWszystkichUzytkownikow();
     //void wczytajUzytkownikowZPliku();
     //void ustawIdZalogowanegoUzytkownika(int noweId);

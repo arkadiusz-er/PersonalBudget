@@ -6,5 +6,6 @@ using namespace std;
 int main()
 {
     PersonalBudget personalBudget("users.xml");
-    personalBudget.userRegistration();
+    //personalBudget.userRegistration();
+    personalBudget.userLogging();
 }

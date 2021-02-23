@@ -14,3 +14,10 @@ int AuxiliaryMethods::convertStringToInt(string number) {
 
     return numberInt;
 }
+
+string AuxiliaryMethods::loadLine() {
+    string enteredData = "";
+    cin.sync();
+    getline(cin, enteredData);
+    return enteredData;
+}

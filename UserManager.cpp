@@ -57,3 +57,36 @@ bool UserManager::checkIfLoginExists(string login) {
     }
     return false;
 }
+
+void UserManager::userLogging() {
+    User user;
+    string login = "", password = "";
+    cout << "Log in" << endl;
+    cout << "---------------------" << endl;
+    cout << "Type in a login: ";
+    login = AuxiliaryMethods::loadLine();
+
+    for (int i = 0; i < users.size(); i++) {
+        if (users[i].getLogin() == login) {
+            for (int numberOfAttempts = 3; numberOfAttempts > 0; numberOfAttempts--) {
+                cout << "Type in a password. Remained attempts: " << numberOfAttempts << ": ";
+                password = AuxiliaryMethods::loadLine();
+
+                if (users[i].getPassword() == password) {
+                    cout << endl << "Logged in." << endl << endl;
+                    system("pause");
+                    loggedUserId = users[i].getUserId();
+                    //cout << endl << "Logged in." << endl << endl;
+                    return;
+                }
+            }
+            cout << "The password has been entered three times incorrectly." << endl;
+            system("pause");
+            return;
+        }
+    }
+    cout << "Entered login doesn't exist. Please try again." << endl << endl;
+    system("pause");
+    system("cls");
+    userLogging();
+}

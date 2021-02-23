@@ -26,7 +26,7 @@ public:
     //}
     void userRegistration();
     //void wypiszWszystkichUzytkownikow();
-    //void logowanieUzytkownika();
+    void userLogging();
     //int pobierzIdZalogowanegoUzytkownika();
     //void zmianaHaslaZalogowanegoUzytkownika();
     //void wylogowanieUzytkownika();
