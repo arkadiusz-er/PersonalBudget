@@ -26,7 +26,9 @@ public:
     //    idZalogowanegoUzytkownika = 0;
     //    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
     //};
-    UserManager(string fileNameWithUsers) : fileWithUsers(fileNameWithUsers) {};
+    UserManager(string fileNameWithUsers) : fileWithUsers(fileNameWithUsers) {
+        users = fileWithUsers.loadUsersFromFile();
+    };
     void userRegistration();
     //void logowanieUzytkownika();
     //void wypiszWszystkichUzytkownikow();

@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 #include "User.h"
-//#include "MetodyPomocnicze.h"
+#include "AuxiliaryMethods.h"
 #include "XmlFile.h"
 
 using namespace std;

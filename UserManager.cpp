@@ -51,7 +51,7 @@ int UserManager::getNewUserId() {
 bool UserManager::checkIfLoginExists(string login) {
     for (int i = 0; i < users.size(); i++) {
         if (users[i].getLogin() == login) {
-            cout << endl << "Such login is exists. Please try type in another login." << endl;
+            cout << endl << "Such login is exists. Please try to type in another login." << endl << endl;
             return true;
         }
     }

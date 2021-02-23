@@ -52,15 +52,38 @@ string FileWithUsers::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKres
     return liniaZDanymiUzytkownika;
 }
 */
-/*
-vector <Uzytkownik> FileWithUsers::wczytajUzytkownikowZPliku() {
-    Uzytkownik uzytkownik;
-    vector <Uzytkownik> uzytkownicy;
-    string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
 
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
+vector <User> FileWithUsers::loadUsersFromFile() {
+    User user;
+    vector <User> users;
+    //string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
 
+    //fstream plikTekstowy;
+    //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
+
+    CMarkup xmlFile;
+    xmlFile.Load("users.xml");
+
+    //bool fileExists = xml.Load( "users.xml" );
+    xmlFile.FindElem();
+    while ( xmlFile.FindChildElem("user") )
+    {
+        xmlFile.IntoElem();
+        xmlFile.FindChildElem( "userId" );
+        user.setUserId(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
+        xmlFile.FindChildElem( "login" );
+        user.setLogin(xmlFile.GetChildData());
+        xmlFile.FindChildElem( "password" );
+        user.setPassword(xmlFile.GetChildData());
+        xmlFile.FindChildElem( "name" );
+        user.setName(xmlFile.GetChildData());
+        xmlFile.FindChildElem( "surname" );
+        user.setSurname(xmlFile.GetChildData());
+        xmlFile.OutOfElem();
+        users.push_back(user);
+    }
+
+    /*
     if (plikTekstowy.good() == true) {
         while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami)) {
             uzytkownik = pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami);
@@ -68,9 +91,10 @@ vector <Uzytkownik> FileWithUsers::wczytajUzytkownikowZPliku() {
         }
         plikTekstowy.close();
     }
-    return uzytkownicy;
+    */
+    return users;
 }
-*/
+
 /*
 Uzytkownik FileWithUsers::pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami) {
     Uzytkownik uzytkownik;
