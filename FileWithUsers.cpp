@@ -5,7 +5,7 @@ void FileWithUsers::addUserToFile(User user) {
     CMarkup xmlFile;
     //string liniaZDanymiUzytkownika = "";
     //xmlFile.Load(getFileName().c_str(), ios::app);
-    xmlFile.Load("users.xml");
+    //xmlFile.Load("users.xml");
 /*
     if (plikTekstowy.good() == true) {
         liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);

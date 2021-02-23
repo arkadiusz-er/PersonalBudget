@@ -21,3 +21,11 @@ string AuxiliaryMethods::loadLine() {
     getline(cin, enteredData);
     return enteredData;
 }
+
+string AuxiliaryMethods::replaceFirstLetterToCapitalRestToLower(string text) {
+    if (!text.empty()) {
+        transform(text.begin(), text.end(), text.begin(), ::tolower);
+        text[0] = toupper(text[0]);
+    }
+    return text;
+}

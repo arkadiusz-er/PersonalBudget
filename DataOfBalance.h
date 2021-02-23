@@ -6,6 +6,7 @@
 using namespace std;
 
 class DataOfBalance {
+protected:
     int userId;
     string date;
     string item;

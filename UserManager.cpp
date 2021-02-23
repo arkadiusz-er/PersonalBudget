@@ -33,10 +33,10 @@ User UserManager::giveNewUserData() {
     string name, surname;
     cout << "Type in a name: ";
     cin >> name;
-    user.setName(name);
+    user.setName(AuxiliaryMethods::replaceFirstLetterToCapitalRestToLower(name));
     cout << "Type in a surname: ";
     cin >> surname;
-    user.setSurname(surname);
+    user.setSurname(AuxiliaryMethods::replaceFirstLetterToCapitalRestToLower(surname));
 
     return user;
 }
@@ -76,7 +76,6 @@ void UserManager::userLogging() {
                     cout << endl << "Logged in." << endl << endl;
                     system("pause");
                     loggedUserId = users[i].getUserId();
-                    //cout << endl << "Logged in." << endl << endl;
                     return;
                 }
             }
@@ -89,4 +88,23 @@ void UserManager::userLogging() {
     system("pause");
     system("cls");
     userLogging();
+}
+
+void UserManager::loadUsersFromFile() {
+    users = fileWithUsers.loadUsersFromFile();
+}
+
+void UserManager::setLoggedUserId(int newUserId) {
+    loggedUserId = newUserId;
+}
+
+int UserManager::getLoggedUserId() {
+    return loggedUserId;
+}
+
+bool UserManager::checkIfUserIsLogged() {
+    if (loggedUserId > 0)
+        return true;
+    else
+        return false;
 }

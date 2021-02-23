@@ -22,10 +22,6 @@ class UserManager {
     bool checkIfLoginExists(string login);
     FileWithUsers fileWithUsers;
 public:
-    //UserManager(string nazwaPlikuZUzytkownikami) : plikZUzytkownikami(nazwaPlikuZUzytkownikami) {
-    //    idZalogowanegoUzytkownika = 0;
-    //    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
-    //};
     UserManager(string fileNameWithUsers) : fileWithUsers(fileNameWithUsers) {
         loggedUserId = 0;
         users = fileWithUsers.loadUsersFromFile();
@@ -33,11 +29,11 @@ public:
     void userRegistration();
     void userLogging();
     //void wypiszWszystkichUzytkownikow();
-    //void wczytajUzytkownikowZPliku();
-    //void ustawIdZalogowanegoUzytkownika(int noweId);
-    //int pobierzIdZalogowanegoUzytkownika();
+    void loadUsersFromFile();
+    void setLoggedUserId(int newUserId);
+    int getLoggedUserId();
     //void zmianaHaslaZalogowanegoUzytkownika();
-    //bool czyUzytkownikJestZalogowany();
+    bool checkIfUserIsLogged();
     //void wylogowanieUzytkownika();
 };
 
