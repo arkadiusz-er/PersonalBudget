@@ -23,24 +23,14 @@ class IncomeManager {
     //char wybierzOpcjeZMenuEdycja();
 
 public:
-    //AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
-    //    : plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
-    //        adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
-    //    };
     IncomeManager(string fileNameWithIncomes, int loggedUserId)
             : fileWithIncomes(fileNameWithIncomes), LOGGED_USER_ID(loggedUserId) {
                 incomes = fileWithIncomes.loadIncomesOfLoggedUserFromFile(LOGGED_USER_ID);
     };
     void addIncome();
     void displayIncomes();
-    //void wyszukajAdresatowPoImieniu();
-    //void wyszukajAdresatowPoNazwisku();
-    //void usunAdresata();
-    //void edytujAdresata();
-    //void zaktualizujDaneWybranegoAdresata(Adresat adresat);
-    //string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
-
-
+    void displayIncomesFromCurrentMonth();
+    void displayNumberSearchedIncomes(int numberOfSearchedIncomes);
 };
 
 #endif

@@ -40,6 +40,7 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes) {
     //void zmianaHaslaZalogowanegoUzytkownika();
     //void wylogowanieUzytkownika();
     void displayIncomes();
+    void displayIncomesFromCurrentMonth();
     //void wyszukajAdresatowPoImieniu();
     //void wyszukajAdresatowPoNazwisku();
     //char wybierzOpcjeZMenuGlownego();

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <windows.h>
 
 using namespace std;
 
@@ -17,6 +18,12 @@ public:
     //static int wczytajLiczbeCalkowita();
     //static void usunPlik(string nazwaPlikuZRozszerzeniem);
     //static void zmienNazwePliku(string staraNazwa, string nowaNazwa);
+
+    static string getTodaysDate();
+    static string getCurrentYear();
+    static string getCurrentMonth();
+    static string getCurrentDay();
+    static string checkIfOneSignInDate(string x);
 };
 
 #endif

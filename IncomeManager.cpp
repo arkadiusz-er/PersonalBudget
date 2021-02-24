@@ -57,8 +57,36 @@ void IncomeManager::displayIncomes() {
 }
 
 void IncomeManager::displayIncomeData(Income income) {
-    cout << endl << "IncomeId:                 " << income.getIncomeId() << endl;
-    cout << "Date:               " << income.getDate() << endl;
-    cout << "Item:           " << income.getItem() << endl;
-    cout << "Amount:     " << income.getAmount() << endl;
+    cout << endl << "IncomeId:  " << income.getIncomeId() << endl;
+    cout << "Date:      " << income.getDate() << endl;
+    cout << "Item:      " << income.getItem() << endl;
+    cout << "Amount:    " << income.getAmount() << endl;
+}
+
+void IncomeManager::displayIncomesFromCurrentMonth() {
+    system("cls");
+    int numberOfSearchedIncomes = 0;
+    if (!incomes.empty()) {
+        cout << "      >>> INCOMES FROM CURRENT MONTH <<<" << endl;
+        cout << "-----------------------------------------------" << endl;
+        for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
+            if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
+                itr->getDate().substr(5,2) == AuxiliaryMethods::getCurrentMonth()) {
+                    displayIncomeData(*itr);
+                    numberOfSearchedIncomes++;
+                }
+        }
+        cout << endl;
+        displayNumberSearchedIncomes(numberOfSearchedIncomes);
+    } else {
+        cout << endl << "There isn't any item in file with incomes." << endl << endl;
+    }
+    system("pause");
+}
+
+void IncomeManager::displayNumberSearchedIncomes(int numberOfSearchedIncomes) {
+    if (numberOfSearchedIncomes == 0)
+        cout << "There isn't any item." << endl << endl;
+    else
+        cout << "Number of incomes is: " << numberOfSearchedIncomes << endl << endl;
 }
