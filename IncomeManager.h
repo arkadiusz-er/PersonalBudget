@@ -27,7 +27,10 @@ public:
     //    : plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika) {
     //        adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     //    };
-    IncomeManager(string fileNameWithIncomes, int loggedUserId) : fileWithIncomes(fileNameWithIncomes), LOGGED_USER_ID(loggedUserId) {};
+    IncomeManager(string fileNameWithIncomes, int loggedUserId)
+            : fileWithIncomes(fileNameWithIncomes), LOGGED_USER_ID(loggedUserId) {
+                incomes = fileWithIncomes.loadIncomesOfLoggedUserFromFile(LOGGED_USER_ID);
+    };
     void addIncome();
     //void wyswietlWszystkichAdresatow();
     //void wyszukajAdresatowPoImieniu();

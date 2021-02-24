@@ -10,6 +10,7 @@
 #include "AuxiliaryMethods.h"
 #include "XmlFile.h"
 #include "UserManager.h"
+//#include "Markup.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ public:
     bool addIncomeToFile(Income income);
     //bool usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
     //void edytujAdresataWPliku(Adresat adresat, string liniaZDanymiAdresataOddzielonePionowymiKreskami);
-    //vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
+    vector <Income> loadIncomesOfLoggedUserFromFile(int loggedUserId);
     int getLastIncomeId();
     //void podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(int idUsuwanegoAdresata);
     int getLastIncomeIdFromFile();

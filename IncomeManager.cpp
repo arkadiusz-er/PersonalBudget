@@ -21,8 +21,7 @@ Income IncomeManager::typeInNewIncome() {
     string date, item;
     int amount;
 
-    income.setIncomeId(fileWithIncomes.getLastIncomeIdFromFile() + 1); //do sprawdzenia
-    //income.setIncomeId(1);
+    income.setIncomeId(fileWithIncomes.getLastIncomeId() + 1);
     income.setUserId(LOGGED_USER_ID);
 
     cout << "Type in a date: ";
