@@ -17,7 +17,7 @@ class IncomeManager {
     FileWithIncomes fileWithIncomes;
 
     Income typeInNewIncome();
-    //void wyswietlDaneAdresata(Adresat adresat);
+    void displayIncomeData(Income income);
     //void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
     //int podajIdWybranegoAdresata();
     //char wybierzOpcjeZMenuEdycja();
@@ -32,7 +32,7 @@ public:
                 incomes = fileWithIncomes.loadIncomesOfLoggedUserFromFile(LOGGED_USER_ID);
     };
     void addIncome();
-    //void wyswietlWszystkichAdresatow();
+    void displayIncomes();
     //void wyszukajAdresatowPoImieniu();
     //void wyszukajAdresatowPoNazwisku();
     //void usunAdresata();

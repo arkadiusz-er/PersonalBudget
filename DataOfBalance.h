@@ -10,18 +10,18 @@ protected:
     int userId;
     string date;
     string item;
-    int amount;
+    double amount;
 
 public:
     void setUserId(int newUserId);
     void setDate (string newDate);
     void setItem (string newItem);
-    void setAmount (int newAmount);
+    void setAmount (double newAmount);
 
     int getUserId();
     string getDate();
     string getItem();
-    int getAmount();
+    double getAmount();
 
 };
 

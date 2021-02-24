@@ -12,7 +12,7 @@ void DataOfBalance::setItem (string newItem) {
     item = newItem;
 }
 
-void DataOfBalance::setAmount (int newAmount) {
+void DataOfBalance::setAmount (double newAmount) {
     amount = newAmount;
 }
 
@@ -28,7 +28,7 @@ string DataOfBalance::getItem() {
     return item;
 }
 
-int DataOfBalance::getAmount() {
+double DataOfBalance::getAmount() {
     return amount;
 }
 

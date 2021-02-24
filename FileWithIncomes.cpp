@@ -1,8 +1,6 @@
 #include "FileWithIncomes.h"
 
 bool FileWithIncomes::addIncomeToFile(Income income) {
-    //string liniaZDanymiAdresata = "";
-    //fstream plikTekstowy;
     //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out | ios::app);
     CMarkup xmlFile;
     //xmlFile.Load("incomes.xml");
@@ -28,21 +26,6 @@ bool FileWithIncomes::addIncomeToFile(Income income) {
     xmlFile.Save("incomes.xml");
     lastIncomeId++;
     return true;
-    /*
-    if (plikTekstowy.good() == true) {
-        liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
-
-        if (czyPlikJestPusty() == true) {
-            plikTekstowy << liniaZDanymiAdresata;
-        } else {
-            plikTekstowy << endl << liniaZDanymiAdresata ;
-        }
-        idOstatniegoAdresata++;
-        plikTekstowy.close();
-        return true;
-    }
-    */
-    //return false;
 }
 
 int FileWithIncomes::getLastIncomeId() {
@@ -59,68 +42,31 @@ int FileWithIncomes::getLastIncomeIdFromFile() {
         xmlFile.FindChildElem( "incomeId" );
         lastIncomeId = AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData());
     }
-    /*
-    if (plikTekstowy.good() == true) {
-        while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {}
-        daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
-        plikTekstowy.close();
-    } else
-        cout << "Nie udalo sie otworzyc pliku i wczytac danych." << endl;
-
-    if (daneOstaniegoAdresataWPliku != "") {
-        idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
-    }
-    */
     return lastIncomeId;
 }
 
 vector <Income> FileWithIncomes::loadIncomesOfLoggedUserFromFile(int loggedUserId) {
     vector <Income> incomes;
     Income income;
-    //string daneJednegoAdresataOddzielonePionowymiKreskami = "";
-    //string daneOstaniegoAdresataWPliku = "";
     CMarkup xmlFile;
     xmlFile.Load("incomes.xml");
     while (xmlFile.FindChildElem("income")) {
         xmlFile.IntoElem();
         xmlFile.FindChildElem( "incomeId" );
+        income.setIncomeId(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
+        lastIncomeId = income.getIncomeId();
+        xmlFile.FindChildElem( "userId" );
         if (loggedUserId == AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData())) {
-            income.setIncomeId(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
-            lastIncomeId = income.getIncomeId();
-            xmlFile.FindChildElem( "userId" );
-            income.setUserId(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
+            income.setUserId(loggedUserId);
             xmlFile.FindChildElem( "date" );
             income.setDate(xmlFile.GetChildData());
             xmlFile.FindChildElem( "item" );
-            income.setDate(xmlFile.GetChildData());
+            income.setItem(xmlFile.GetChildData());
             xmlFile.FindChildElem( "amount" );
             income.setAmount(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
             incomes.push_back(income);
-        } else {
-            lastIncomeId = AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData());
         }
         xmlFile.OutOfElem();
     }
-
-    //lastIncomeId = income.getIncomeId();
-    /*
-    fstream plikTekstowy;
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
-
-    if (plikTekstowy.good() == true) {
-        while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {
-            if(idZalogowanegoUzytkownika == pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami)) {
-                adresat = pobierzDaneAdresata(daneJednegoAdresataOddzielonePionowymiKreskami);
-                adresaci.push_back(adresat);
-            }
-        }
-        daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
-        plikTekstowy.close();
-    } else
-        cout << "Nie udalo sie otworzyc pliku i wczytac danych." << endl;
-
-    if (daneOstaniegoAdresataWPliku != "")
-        idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
-    */
     return incomes;
 }

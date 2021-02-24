@@ -39,7 +39,7 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes) {
     //int pobierzIdZalogowanegoUzytkownika();
     //void zmianaHaslaZalogowanegoUzytkownika();
     //void wylogowanieUzytkownika();
-    //void wyswietlWszystkichAdresatow();
+    void displayIncomes();
     //void wyszukajAdresatowPoImieniu();
     //void wyszukajAdresatowPoNazwisku();
     //char wybierzOpcjeZMenuGlownego();
