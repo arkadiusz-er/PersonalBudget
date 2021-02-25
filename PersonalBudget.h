@@ -41,6 +41,7 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes) {
     //void wylogowanieUzytkownika();
     void displayIncomes();
     void displayIncomesFromCurrentMonth();
+    void displayIncomesFromPreviousMonth();
     //void wyszukajAdresatowPoImieniu();
     //void wyszukajAdresatowPoNazwisku();
     //char wybierzOpcjeZMenuGlownego();

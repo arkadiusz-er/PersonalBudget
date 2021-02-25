@@ -24,8 +24,24 @@ Income IncomeManager::typeInNewIncome() {
     income.setIncomeId(fileWithIncomes.getLastIncomeId() + 1);
     income.setUserId(LOGGED_USER_ID);
 
-    cout << "Type in a date: ";
-    date = AuxiliaryMethods::loadLine();
+    char userReply;
+    cout << "Is income concern today? (y/n) ";
+    cin >> userReply;
+    while (userReply != 'Y' && userReply != 'N') {
+        cout << "Incorrect sign. Please choose from Y or N. ";
+        cin >> userReply;
+        cout << endl;
+    }
+    if (userReply == 'Y') {
+        date = AuxiliaryMethods::getTodaysDate();
+    } else if (userReply == 'N') {
+        cout << "Type in a date (YYYY-MM-DD): ";
+        date = AuxiliaryMethods::loadLine();
+        while (AuxiliaryMethods::checkIfDataIsCorrect(date) == false) {
+            cout << "Type in a date (YYYY-MM-DD): ";
+            date = AuxiliaryMethods::loadLine();
+        }
+    }
 
     cout << "Type in an item: ";
     item = AuxiliaryMethods::loadLine();
@@ -44,7 +60,7 @@ Income IncomeManager::typeInNewIncome() {
 void IncomeManager::displayIncomes() {
     system("cls");
     if (!incomes.empty()) {
-        cout << "             >>> INCOMES <<<" << endl;
+        cout << "                >>> INCOMES <<<" << endl;
         cout << "-----------------------------------------------" << endl;
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             displayIncomeData(*itr);
@@ -72,6 +88,39 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
                 itr->getDate().substr(5,2) == AuxiliaryMethods::getCurrentMonth()) {
+                    displayIncomeData(*itr);
+                    numberOfSearchedIncomes++;
+                }
+        }
+        cout << endl;
+        displayNumberSearchedIncomes(numberOfSearchedIncomes);
+    } else {
+        cout << endl << "There isn't any item in file with incomes." << endl << endl;
+    }
+    system("pause");
+}
+
+void IncomeManager::displayIncomesFromPreviousMonth() {
+    system("cls");
+    int numberOfSearchedIncomes = 0;
+    if (!incomes.empty()) {
+        cout << "      >>> INCOMES FROM PREVIOUS MONTH <<<" << endl;
+        cout << "-----------------------------------------------" << endl;
+        int searchedMonthInt = 0;
+        int searchedYearInt = 0;
+        string today = AuxiliaryMethods::getTodaysDate();
+        if (today.substr(5,2) == "01") {
+            searchedMonthInt = 12;
+            searchedYearInt = AuxiliaryMethods::convertStringToInt(AuxiliaryMethods::getCurrentYear()) - 1;
+        } else {
+            searchedMonthInt = AuxiliaryMethods::convertStringToInt(AuxiliaryMethods::getCurrentMonth()) - 1;
+            searchedYearInt = AuxiliaryMethods::convertStringToInt(AuxiliaryMethods::getCurrentYear());
+        }
+        string searchedYearString = AuxiliaryMethods::convertIntToString(searchedYearInt);
+        string searchedMonthString = AuxiliaryMethods::checkIfOneSignInDate(AuxiliaryMethods::convertIntToString(searchedMonthInt));
+        for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
+            if (itr->getDate().substr(0,4) == searchedYearString &&
+                itr->getDate().substr(5,2) == searchedMonthString) {
                     displayIncomeData(*itr);
                     numberOfSearchedIncomes++;
                 }

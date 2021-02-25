@@ -70,3 +70,30 @@ string AuxiliaryMethods::checkIfOneSignInDate(string x) {
     }
     return x;
 }
+
+bool AuxiliaryMethods::checkIfDataIsCorrect (string dateToChecking) {
+    SYSTEMTIME st;
+    GetSystemTime(&st);
+
+    if (dateToChecking[4] == '-' && dateToChecking[7] == '-' && dateToChecking.length() == 10) {
+        int year = AuxiliaryMethods::convertStringToInt(dateToChecking.substr(0,4));
+        int month = AuxiliaryMethods::convertStringToInt(dateToChecking.substr(5,2));
+        int day = AuxiliaryMethods::convertStringToInt(dateToChecking.substr(8,2));
+        if (year >= 2000 && year < st.wYear && month <= 12 && day <= 31 || (year == st.wYear && month == st.wMonth && day <= st.wDay) || (year == st.wYear && month < st.wMonth && day <= 31)) {
+            if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
+                cout << "This month has 30 days.";
+            } else if (year % 4 == 0 && month == 2 && day > 29) {
+                cout << "This month has 29 days.";
+            } else if (year % 4 != 0 && month == 2 && day > 28) {
+                cout << "This month has 28 days.";
+            } else {
+                return true;
+            }
+        } else {
+            cout << "This date is incorrect.";
+        }
+    } else
+        cout << "Incorrect format of data.";
+    cout << endl << endl;
+    return false;
+}

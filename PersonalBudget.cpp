@@ -31,3 +31,9 @@ void PersonalBudget::displayIncomesFromCurrentMonth() {
         incomeManager->displayIncomesFromCurrentMonth();
     }
 }
+
+void PersonalBudget::displayIncomesFromPreviousMonth() {
+    if (userManager.checkIfUserIsLogged()) {
+        incomeManager->displayIncomesFromPreviousMonth();
+    }
+}

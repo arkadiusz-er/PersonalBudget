@@ -18,6 +18,7 @@ class IncomeManager {
 
     Income typeInNewIncome();
     void displayIncomeData(Income income);
+    void displayNumberSearchedIncomes(int numberOfSearchedIncomes);
     //void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
     //int podajIdWybranegoAdresata();
     //char wybierzOpcjeZMenuEdycja();
@@ -30,7 +31,7 @@ public:
     void addIncome();
     void displayIncomes();
     void displayIncomesFromCurrentMonth();
-    void displayNumberSearchedIncomes(int numberOfSearchedIncomes);
+    void displayIncomesFromPreviousMonth();
 };
 
 #endif

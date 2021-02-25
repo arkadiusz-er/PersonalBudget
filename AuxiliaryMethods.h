@@ -24,6 +24,7 @@ public:
     static string getCurrentMonth();
     static string getCurrentDay();
     static string checkIfOneSignInDate(string x);
+    static bool checkIfDataIsCorrect (string dateToChecking);
 };
 
 #endif
