@@ -139,3 +139,35 @@ void IncomeManager::displayNumberSearchedIncomes(int numberOfSearchedIncomes) {
     else
         cout << "Number of incomes is: " << numberOfSearchedIncomes << endl << endl;
 }
+
+void IncomeManager::displayIncomesFromChosenPeriod() {
+    system("cls");
+    int numberOfSearchedIncomes = 0;
+    if (!incomes.empty()) {
+        string firstDate = "";
+        string secondDate = "";
+        cout << "Type in data of begining (YYYY-MM-DD): "; cin >> firstDate;
+        cout << "Type in date of ending (YYYY-MM-DD): "; cin >> secondDate;
+        AuxiliaryMethods::checkIfDataIsCorrect(firstDate);
+        AuxiliaryMethods::checkIfDataIsCorrect(secondDate);
+
+        int firstDateAsInteger = AuxiliaryMethods::changeDateToInteger(firstDate);
+        int secondDateAsInteger = AuxiliaryMethods::changeDateToInteger(secondDate);
+
+        if (firstDateAsInteger <= secondDateAsInteger) {
+            for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
+                int dateFromVectorAsInteger = AuxiliaryMethods::changeDateToInteger(itr->getDate());
+                if (dateFromVectorAsInteger >= firstDateAsInteger &&
+                    dateFromVectorAsInteger <= secondDateAsInteger) {
+                        displayIncomeData(*itr);
+                        numberOfSearchedIncomes++;
+                    }
+            }
+        cout << endl;
+        displayNumberSearchedIncomes(numberOfSearchedIncomes);
+        } else {
+            cout << endl << "There isn't any item in file with incomes." << endl << endl;
+        }
+    system("pause");
+    }
+}

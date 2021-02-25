@@ -42,6 +42,7 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes) {
     void displayIncomes();
     void displayIncomesFromCurrentMonth();
     void displayIncomesFromPreviousMonth();
+    void displayIncomesFromChosenPeriod();
     //void wyszukajAdresatowPoImieniu();
     //void wyszukajAdresatowPoNazwisku();
     //char wybierzOpcjeZMenuGlownego();

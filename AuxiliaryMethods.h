@@ -25,6 +25,9 @@ public:
     static string getCurrentDay();
     static string checkIfOneSignInDate(string x);
     static bool checkIfDataIsCorrect (string dateToChecking);
+
+    static int changeDateToInteger (string dataToChange);
+    static string changeIntegerToDate(int dateAsInteger);
 };
 
 #endif

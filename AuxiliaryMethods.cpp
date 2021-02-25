@@ -97,3 +97,15 @@ bool AuxiliaryMethods::checkIfDataIsCorrect (string dateToChecking) {
     cout << endl << endl;
     return false;
 }
+
+int AuxiliaryMethods::changeDateToInteger (string dataToChange) {
+    dataToChange = dataToChange.substr(0,4) + dataToChange.substr(5,2) + dataToChange.substr(8,2);
+    int dateAsInteger = convertStringToInt(dataToChange);
+    return dateAsInteger;
+}
+
+string AuxiliaryMethods::changeIntegerToDate(int dateAsInteger) {
+    string data = convertIntToString(dateAsInteger);
+    data = data.substr(0,4) + "-" + data.substr(4,2) + "-" + data.substr(6,2);
+    return data;
+}
