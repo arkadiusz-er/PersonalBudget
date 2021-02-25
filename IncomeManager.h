@@ -19,9 +19,6 @@ class IncomeManager {
     Income typeInNewIncome();
     void displayIncomeData(Income income);
     void displayNumberSearchedIncomes(int numberOfSearchedIncomes);
-    //void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
-    //int podajIdWybranegoAdresata();
-    //char wybierzOpcjeZMenuEdycja();
 
 public:
     IncomeManager(string fileNameWithIncomes, int loggedUserId)

@@ -7,12 +7,27 @@ string AuxiliaryMethods::convertIntToString(int number) {
     return str;
 }
 
+string AuxiliaryMethods::convertDoubleToString(double number) {
+    ostringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
+}
+
 int AuxiliaryMethods::convertStringToInt(string number) {
     int numberInt;
     istringstream iss(number);
     iss >> numberInt;
 
     return numberInt;
+}
+
+double AuxiliaryMethods::convertStringToDouble(string number) {
+    double numberDouble;
+    istringstream iss(number);
+    iss >> numberDouble;
+
+    return numberDouble;
 }
 
 string AuxiliaryMethods::loadLine() {

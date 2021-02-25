@@ -3,7 +3,6 @@
 bool FileWithIncomes::addIncomeToFile(Income income) {
     //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out | ios::app);
     CMarkup xmlFile;
-    //xmlFile.Load("incomes.xml");
 
     bool fileExists = xmlFile.Load( "incomes.xml" );
 
@@ -21,7 +20,7 @@ bool FileWithIncomes::addIncomeToFile(Income income) {
     xmlFile.AddElem("userId", income.getUserId());
     xmlFile.AddElem("date", income.getDate());
     xmlFile.AddElem("item", income.getItem());
-    xmlFile.AddElem("amount", income.getAmount());
+    xmlFile.AddElem("amount", AuxiliaryMethods::convertDoubleToString(income.getAmount()));
 
     xmlFile.Save("incomes.xml");
     lastIncomeId++;
@@ -63,7 +62,7 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUserFromFile(int loggedUserI
             xmlFile.FindChildElem( "item" );
             income.setItem(xmlFile.GetChildData());
             xmlFile.FindChildElem( "amount" );
-            income.setAmount(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
+            income.setAmount(AuxiliaryMethods::convertStringToDouble(xmlFile.GetChildData()));
             incomes.push_back(income);
         }
         xmlFile.OutOfElem();

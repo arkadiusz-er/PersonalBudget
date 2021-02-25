@@ -19,7 +19,7 @@ void IncomeManager::addIncome() {
 Income IncomeManager::typeInNewIncome() {
     Income income;
     string date, item;
-    int amount;
+    double amount;
 
     income.setIncomeId(fileWithIncomes.getLastIncomeId() + 1);
     income.setUserId(LOGGED_USER_ID);
@@ -48,7 +48,7 @@ Income IncomeManager::typeInNewIncome() {
     item = AuxiliaryMethods::replaceFirstLetterToCapitalRestToLower(item);
 
     cout << "Type in an amount: ";
-    amount = AuxiliaryMethods::convertStringToInt(AuxiliaryMethods::loadLine());
+    amount = AuxiliaryMethods::convertStringToDouble(AuxiliaryMethods::loadLine());
 
     income.setDate(date);
     income.setItem(item);
@@ -59,13 +59,15 @@ Income IncomeManager::typeInNewIncome() {
 
 void IncomeManager::displayIncomes() {
     system("cls");
+    double sumOfIncomes = 0;
     if (!incomes.empty()) {
         cout << "                >>> INCOMES <<<" << endl;
         cout << "-----------------------------------------------" << endl;
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             displayIncomeData(*itr);
+            sumOfIncomes += itr->getAmount();
         }
-        cout << endl;
+        cout << endl << "Sum of incomes: " << sumOfIncomes << endl;
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -82,6 +84,7 @@ void IncomeManager::displayIncomeData(Income income) {
 void IncomeManager::displayIncomesFromCurrentMonth() {
     system("cls");
     int numberOfSearchedIncomes = 0;
+    double sumOfIncomes = 0;
     if (!incomes.empty()) {
         cout << "      >>> INCOMES FROM CURRENT MONTH <<<" << endl;
         cout << "-----------------------------------------------" << endl;
@@ -90,10 +93,12 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
                 itr->getDate().substr(5,2) == AuxiliaryMethods::getCurrentMonth()) {
                     displayIncomeData(*itr);
                     numberOfSearchedIncomes++;
+                    sumOfIncomes += itr->getAmount();
                 }
         }
         cout << endl;
         displayNumberSearchedIncomes(numberOfSearchedIncomes);
+        cout << "Sum of incomes: " << sumOfIncomes << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -103,6 +108,7 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
 void IncomeManager::displayIncomesFromPreviousMonth() {
     system("cls");
     int numberOfSearchedIncomes = 0;
+    double sumOfIncomes = 0;
     if (!incomes.empty()) {
         cout << "      >>> INCOMES FROM PREVIOUS MONTH <<<" << endl;
         cout << "-----------------------------------------------" << endl;
@@ -123,10 +129,12 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
                 itr->getDate().substr(5,2) == searchedMonthString) {
                     displayIncomeData(*itr);
                     numberOfSearchedIncomes++;
+                    sumOfIncomes += itr->getAmount();
                 }
         }
         cout << endl;
         displayNumberSearchedIncomes(numberOfSearchedIncomes);
+        cout << "Sum of incomes: " << sumOfIncomes << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -135,14 +143,15 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
 
 void IncomeManager::displayNumberSearchedIncomes(int numberOfSearchedIncomes) {
     if (numberOfSearchedIncomes == 0)
-        cout << "There isn't any item." << endl << endl;
+        cout << "There isn't any item." << endl;
     else
-        cout << "Number of incomes is: " << numberOfSearchedIncomes << endl << endl;
+        cout << "Number of incomes is: " << numberOfSearchedIncomes << endl;
 }
 
 void IncomeManager::displayIncomesFromChosenPeriod() {
     system("cls");
     int numberOfSearchedIncomes = 0;
+    double sumOfIncomes = 0;
     if (!incomes.empty()) {
         string firstDate = "";
         string secondDate = "";
@@ -150,6 +159,9 @@ void IncomeManager::displayIncomesFromChosenPeriod() {
         cout << "Type in date of ending (YYYY-MM-DD): "; cin >> secondDate;
         AuxiliaryMethods::checkIfDataIsCorrect(firstDate);
         AuxiliaryMethods::checkIfDataIsCorrect(secondDate);
+
+        cout << endl << " >>> INCOMES FROM " << firstDate << " TO " << secondDate << " <<<" << endl;
+        cout << "-----------------------------------------------" << endl;
 
         int firstDateAsInteger = AuxiliaryMethods::changeDateToInteger(firstDate);
         int secondDateAsInteger = AuxiliaryMethods::changeDateToInteger(secondDate);
@@ -161,10 +173,12 @@ void IncomeManager::displayIncomesFromChosenPeriod() {
                     dateFromVectorAsInteger <= secondDateAsInteger) {
                         displayIncomeData(*itr);
                         numberOfSearchedIncomes++;
+                        sumOfIncomes += itr->getAmount();
                     }
             }
         cout << endl;
         displayNumberSearchedIncomes(numberOfSearchedIncomes);
+        cout << "Sum of incomes: " << sumOfIncomes << endl << endl;
         } else {
             cout << endl << "There isn't any item in file with incomes." << endl << endl;
         }
