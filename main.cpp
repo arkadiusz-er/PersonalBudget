@@ -9,8 +9,8 @@ int main()
     //personalBudget.userRegistration();
     personalBudget.userLogging();
     //personalBudget.displayIncomes();
-    personalBudget.addIncome();
+    //personalBudget.addIncome();
     personalBudget.displayIncomesFromCurrentMonth();
     personalBudget.displayIncomesFromPreviousMonth();
-    personalBudget.displayIncomesFromChosenPeriod();
+    //personalBudget.displayIncomesFromChosenPeriod();
 }

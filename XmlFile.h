@@ -16,11 +16,11 @@ public:
     string getFileName() {
         return FILE_NAME;
     }
-    /*
+/*
     bool checkIfFileIsEmpty() {
         bool emptyFile = true;
         CMarkup xmlFile;
-        xmlFile.Load(getFileName().c_str(), ios::app);
+        xmlFile.Load(getFileName().c_str());
 
         if (xmlFile.good() == true) {
             xmlFile.seekg(0, ios::end);
@@ -31,7 +31,7 @@ public:
         xmlFile.close();
         return emptyFile;
     }
-    */
+*/
 };
 
 #endif

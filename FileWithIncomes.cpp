@@ -1,10 +1,8 @@
 #include "FileWithIncomes.h"
 
 bool FileWithIncomes::addIncomeToFile(Income income) {
-    //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out | ios::app);
     CMarkup xmlFile;
-
-    bool fileExists = xmlFile.Load( "incomes.xml" );
+    bool fileExists = xmlFile.Load(getFileName());
 
     if (!fileExists)
     {
@@ -22,7 +20,7 @@ bool FileWithIncomes::addIncomeToFile(Income income) {
     xmlFile.AddElem("item", income.getItem());
     xmlFile.AddElem("amount", AuxiliaryMethods::convertDoubleToString(income.getAmount()));
 
-    xmlFile.Save("incomes.xml");
+    xmlFile.Save(getFileName());
     lastIncomeId++;
     return true;
 }
@@ -33,8 +31,7 @@ int FileWithIncomes::getLastIncomeId() {
 
 int FileWithIncomes::getLastIncomeIdFromFile() {
     CMarkup xmlFile;
-    //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
-    xmlFile.Load("incomes.xml");
+    xmlFile.Load(getFileName());
     xmlFile.FindElem();
     while (xmlFile.FindChildElem("income")) {
         xmlFile.IntoElem();
@@ -48,7 +45,7 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUserFromFile(int loggedUserI
     vector <Income> incomes;
     Income income;
     CMarkup xmlFile;
-    xmlFile.Load("incomes.xml");
+    xmlFile.Load(getFileName());
     while (xmlFile.FindChildElem("income")) {
         xmlFile.IntoElem();
         xmlFile.FindChildElem( "incomeId" );

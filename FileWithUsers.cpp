@@ -3,24 +3,7 @@
 void FileWithUsers::addUserToFile(User user) {
 
     CMarkup xmlFile;
-    //string liniaZDanymiUzytkownika = "";
-    //xmlFile.Load(getFileName().c_str(), ios::app);
-    //xmlFile.Load("users.xml");
-/*
-    if (plikTekstowy.good() == true) {
-        liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
-
-        if (czyPlikJestPusty() == true) {
-            plikTekstowy << liniaZDanymiUzytkownika;
-        } else {
-            plikTekstowy << endl << liniaZDanymiUzytkownika ;
-        }
-    } else
-        cout << "Nie udalo sie otworzyc pliku " << pobierzNazwePliku() << " i zapisac w nim danych." << endl;
-    plikTekstowy.close();
-    */
-
-    bool fileExists = xmlFile.Load( "users.xml" );
+    bool fileExists = xmlFile.Load(getFileName());
 
     if (!fileExists)
     {
@@ -38,19 +21,17 @@ void FileWithUsers::addUserToFile(User user) {
     xmlFile.AddElem("name", user.getName());
     xmlFile.AddElem("surname", user.getSurname());
 
-    xmlFile.Save("users.xml");
+    xmlFile.Save(getFileName());
 
 }
 
 vector <User> FileWithUsers::loadUsersFromFile() {
     User user;
     vector <User> users;
-    //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
 
     CMarkup xmlFile;
-    xmlFile.Load("users.xml");
+    xmlFile.Load(getFileName());
 
-    //bool fileExists = xml.Load( "users.xml" );
     xmlFile.FindElem();
     while ( xmlFile.FindChildElem("user") )
     {
