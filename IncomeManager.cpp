@@ -25,7 +25,7 @@ Income IncomeManager::typeInNewIncome() {
     income.setUserId(LOGGED_USER_ID);
 
     char userReply;
-    cout << "Is income concern today? (y/n) ";
+    cout << "Does income concern today? (y/n) ";
     cin >> userReply;
     while (userReply != 'Y' && userReply != 'N') {
         cout << "Incorrect sign. Please choose from Y or N. ";
