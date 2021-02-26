@@ -1,13 +1,8 @@
 #include "FileWithIncomes.h"
 
 bool FileWithIncomes::addIncomeToFile(Income income) {
-    //string liniaZDanymiAdresata = "";
-    //fstream plikTekstowy;
-    //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out | ios::app);
     CMarkup xmlFile;
-    //xmlFile.Load("incomes.xml");
-
-    bool fileExists = xmlFile.Load( "incomes.xml" );
+    bool fileExists = xmlFile.Load(getFileName());
 
     if (!fileExists)
     {
@@ -23,26 +18,11 @@ bool FileWithIncomes::addIncomeToFile(Income income) {
     xmlFile.AddElem("userId", income.getUserId());
     xmlFile.AddElem("date", income.getDate());
     xmlFile.AddElem("item", income.getItem());
-    xmlFile.AddElem("amount", income.getAmount());
+    xmlFile.AddElem("amount", AuxiliaryMethods::convertDoubleToString(income.getAmount()));
 
-    xmlFile.Save("incomes.xml");
+    xmlFile.Save(getFileName());
     lastIncomeId++;
     return true;
-    /*
-    if (plikTekstowy.good() == true) {
-        liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
-
-        if (czyPlikJestPusty() == true) {
-            plikTekstowy << liniaZDanymiAdresata;
-        } else {
-            plikTekstowy << endl << liniaZDanymiAdresata ;
-        }
-        idOstatniegoAdresata++;
-        plikTekstowy.close();
-        return true;
-    }
-    */
-    //return false;
 }
 
 int FileWithIncomes::getLastIncomeId() {
@@ -51,25 +31,38 @@ int FileWithIncomes::getLastIncomeId() {
 
 int FileWithIncomes::getLastIncomeIdFromFile() {
     CMarkup xmlFile;
-    //plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
-    xmlFile.Load("incomes.xml");
+    xmlFile.Load(getFileName());
     xmlFile.FindElem();
     while (xmlFile.FindChildElem("income")) {
         xmlFile.IntoElem();
         xmlFile.FindChildElem( "incomeId" );
         lastIncomeId = AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData());
     }
-    /*
-    if (plikTekstowy.good() == true) {
-        while (getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)) {}
-        daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
-        plikTekstowy.close();
-    } else
-        cout << "Nie udalo sie otworzyc pliku i wczytac danych." << endl;
-
-    if (daneOstaniegoAdresataWPliku != "") {
-        idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
-    }
-    */
     return lastIncomeId;
+}
+
+vector <Income> FileWithIncomes::loadIncomesOfLoggedUserFromFile(int loggedUserId) {
+    vector <Income> incomes;
+    Income income;
+    CMarkup xmlFile;
+    xmlFile.Load(getFileName());
+    while (xmlFile.FindChildElem("income")) {
+        xmlFile.IntoElem();
+        xmlFile.FindChildElem( "incomeId" );
+        income.setIncomeId(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
+        lastIncomeId = income.getIncomeId();
+        xmlFile.FindChildElem( "userId" );
+        if (loggedUserId == AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData())) {
+            income.setUserId(loggedUserId);
+            xmlFile.FindChildElem( "date" );
+            income.setDate(xmlFile.GetChildData());
+            xmlFile.FindChildElem( "item" );
+            income.setItem(xmlFile.GetChildData());
+            xmlFile.FindChildElem( "amount" );
+            income.setAmount(AuxiliaryMethods::convertStringToDouble(xmlFile.GetChildData()));
+            incomes.push_back(income);
+        }
+        xmlFile.OutOfElem();
+    }
+    return incomes;
 }

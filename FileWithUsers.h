@@ -13,8 +13,6 @@
 using namespace std;
 
 class FileWithUsers : public XmlFile {
-    //string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
-    //Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
 
 public:
     FileWithUsers(string fileNameWithUsers) : XmlFile(fileNameWithUsers) {};

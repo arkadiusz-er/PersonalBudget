@@ -8,5 +8,9 @@ int main()
     PersonalBudget personalBudget("users.xml", "incomes.xml");
     //personalBudget.userRegistration();
     personalBudget.userLogging();
-    personalBudget.addIncome();
+    //personalBudget.displayIncomes();
+    //personalBudget.addIncome();
+    personalBudget.displayIncomesFromCurrentMonth();
+    personalBudget.displayIncomesFromPreviousMonth();
+    //personalBudget.displayIncomesFromChosenPeriod();
 }

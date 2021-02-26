@@ -10,19 +10,36 @@ void PersonalBudget::userLogging() {
         incomeManager = new IncomeManager(FILE_NAME_WITH_INCOMES, userManager.getLoggedUserId());
     }
 }
-/*
-void KsiazkaAdresowa::logowanieUzytkownika() {
-    uzytkownikMenedzer.logowanieUzytkownika();
-    if (uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
-        adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI, uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika());
+
+void PersonalBudget::addIncome() {
+    if (userManager.checkIfUserIsLogged()) {
+        incomeManager->addIncome();
+    } else {
+        cout << "You have to login firstly!" << endl;
+        system("pause");
     }
 }
-*/
-void PersonalBudget::addIncome() {
-    //if (UserManager.checkIfUserIsLogged()) {
-        incomeManager->addIncome();
-    //} else {
-    //    cout << "Aby dodac adresata nalezy najpierw sie zalogowac!" << endl;
-    //    system("pause");
-    //}
+
+void PersonalBudget::displayIncomes() {
+    if (userManager.checkIfUserIsLogged()) {
+        incomeManager->displayIncomes();
+    }
+}
+
+void PersonalBudget::displayIncomesFromCurrentMonth() {
+    if (userManager.checkIfUserIsLogged()) {
+        incomeManager->displayIncomesFromCurrentMonth();
+    }
+}
+
+void PersonalBudget::displayIncomesFromPreviousMonth() {
+    if (userManager.checkIfUserIsLogged()) {
+        incomeManager->displayIncomesFromPreviousMonth();
+    }
+}
+
+void PersonalBudget::displayIncomesFromChosenPeriod() {
+    if (userManager.checkIfUserIsLogged()) {
+        incomeManager->displayIncomesFromChosenPeriod();
+    }
 }

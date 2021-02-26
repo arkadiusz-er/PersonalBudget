@@ -9,7 +9,6 @@
 
 #include "User.h"
 #include "FileWithUsers.h"
-//#include "AdresatMenedzer.h"
 
 using namespace std;
 
@@ -28,7 +27,6 @@ public:
     };
     void userRegistration();
     void userLogging();
-    //void wypiszWszystkichUzytkownikow();
     void loadUsersFromFile();
     void setLoggedUserId(int newUserId);
     int getLoggedUserId();
