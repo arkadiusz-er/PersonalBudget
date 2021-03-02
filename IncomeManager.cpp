@@ -18,7 +18,7 @@ void IncomeManager::addIncome() {
 
 Income IncomeManager::typeInNewIncome() {
     Income income;
-    string date, item;
+    string date, item, amountStr;
     double amount;
 
     income.setIncomeId(fileWithIncomes.getLastIncomeId() + 1);
@@ -48,7 +48,9 @@ Income IncomeManager::typeInNewIncome() {
     item = AuxiliaryMethods::replaceFirstLetterToCapitalRestToLower(item);
 
     cout << "Type in an amount: ";
-    amount = AuxiliaryMethods::convertStringToDouble(AuxiliaryMethods::loadLine());
+    amountStr = AuxiliaryMethods::loadLine();
+    amountStr = AuxiliaryMethods::changeCommaIfExistsToDot(amountStr);
+    amount = AuxiliaryMethods::convertStringToDouble(amountStr);
 
     income.setDate(date);
     income.setItem(item);
@@ -60,9 +62,9 @@ Income IncomeManager::typeInNewIncome() {
 void IncomeManager::displayIncomes() {
     system("cls");
     double sumOfIncomes = 0;
+    cout << "                >>> INCOMES <<<" << endl;
+    cout << "-----------------------------------------------" << endl;
     if (!incomes.empty()) {
-        cout << "                >>> INCOMES <<<" << endl;
-        cout << "-----------------------------------------------" << endl;
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             displayIncomeData(*itr);
             sumOfIncomes += itr->getAmount();
@@ -85,9 +87,9 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
     system("cls");
     int numberOfSearchedIncomes = 0;
     double sumOfIncomes = 0;
+    cout << "      >>> INCOMES FROM CURRENT MONTH <<<" << endl;
+    cout << "-----------------------------------------------" << endl;
     if (!incomes.empty()) {
-        cout << "      >>> INCOMES FROM CURRENT MONTH <<<" << endl;
-        cout << "-----------------------------------------------" << endl;
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
                 itr->getDate().substr(5,2) == AuxiliaryMethods::getCurrentMonth()) {
@@ -109,9 +111,9 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
     system("cls");
     int numberOfSearchedIncomes = 0;
     double sumOfIncomes = 0;
+    cout << "      >>> INCOMES FROM PREVIOUS MONTH <<<" << endl;
+    cout << "-----------------------------------------------" << endl;
     if (!incomes.empty()) {
-        cout << "      >>> INCOMES FROM PREVIOUS MONTH <<<" << endl;
-        cout << "-----------------------------------------------" << endl;
         int searchedMonthInt = 0;
         int searchedYearInt = 0;
         string today = AuxiliaryMethods::getTodaysDate();

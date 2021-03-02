@@ -124,3 +124,10 @@ string AuxiliaryMethods::changeIntegerToDate(int dateAsInteger) {
     data = data.substr(0,4) + "-" + data.substr(4,2) + "-" + data.substr(6,2);
     return data;
 }
+
+string AuxiliaryMethods::changeCommaIfExistsToDot(string amountString) {
+    for (int i = 0; i < amountString.length(); i++) {
+        if (amountString[i] == 44) amountString[i] = 46;
+    }
+    return amountString;
+}

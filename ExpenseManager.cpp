@@ -18,7 +18,7 @@ void ExpenseManager::addExpense() {
 
 Expense ExpenseManager::typeInNewExpense() {
     Expense expense;
-    string date, item;
+    string date, item, amountStr;
     double amount;
 
     expense.setExpenseId(fileWithExpenses.getLastExpenseId() + 1);
@@ -48,7 +48,9 @@ Expense ExpenseManager::typeInNewExpense() {
     item = AuxiliaryMethods::replaceFirstLetterToCapitalRestToLower(item);
 
     cout << "Type in an amount: ";
-    amount = AuxiliaryMethods::convertStringToDouble(AuxiliaryMethods::loadLine());
+    amountStr = AuxiliaryMethods::loadLine();
+    amountStr = AuxiliaryMethods::changeCommaIfExistsToDot(amountStr);
+    amount = AuxiliaryMethods::convertStringToDouble(amountStr);
 
     expense.setDate(date);
     expense.setItem(item);
