@@ -5,12 +5,17 @@ using namespace std;
 
 int main()
 {
-    PersonalBudget personalBudget("users.xml", "incomes.xml");
+    PersonalBudget personalBudget("users.xml", "incomes.xml", "expenses.xml");
     //personalBudget.userRegistration();
     personalBudget.userLogging();
     //personalBudget.displayIncomes();
     //personalBudget.addIncome();
+    //personalBudget.addExpense();
+    //personalBudget.addExpense();
     personalBudget.displayIncomesFromCurrentMonth();
     personalBudget.displayIncomesFromPreviousMonth();
     //personalBudget.displayIncomesFromChosenPeriod();
+    personalBudget.displayExpensesFromCurrentMonth();
+    personalBudget.displayExpensesFromPreviousMonth();
+    //personalBudget.displayExpensesFromChosenPeriod();
 }
