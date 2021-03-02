@@ -105,10 +105,10 @@ bool AuxiliaryMethods::checkIfDataIsCorrect (string dateToChecking) {
                 return true;
             }
         } else {
-            cout << "This date is incorrect.";
+            cout << "This date is incorrect. Please try again.";
         }
     } else
-        cout << "Incorrect format of data.";
+        cout << "Incorrect format of data. Please try again.";
     cout << endl << endl;
     return false;
 }

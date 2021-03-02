@@ -13,6 +13,7 @@ using namespace std;
 
 class IncomeManager {
     const int LOGGED_USER_ID;
+    double sumOfIncomes;
     vector <Income> incomes;
     FileWithIncomes fileWithIncomes;
 
@@ -24,12 +25,16 @@ public:
     IncomeManager(string fileNameWithIncomes, int loggedUserId)
             : fileWithIncomes(fileNameWithIncomes), LOGGED_USER_ID(loggedUserId) {
                 incomes = fileWithIncomes.loadIncomesOfLoggedUserFromFile(LOGGED_USER_ID);
+                sumOfIncomes = 0;
     };
     void addIncome();
     void displayIncomes();
     void displayIncomesFromCurrentMonth();
     void displayIncomesFromPreviousMonth();
-    void displayIncomesFromChosenPeriod();
+    void displayIncomesFromChosenPeriod(int firstDate, int secondDate);
+
+    void setSumOfIncomes(double newSumOfIncomes);
+    double getSumOfIncomes();
 };
 
 #endif

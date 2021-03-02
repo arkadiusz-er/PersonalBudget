@@ -12,10 +12,13 @@ int main()
     //personalBudget.addIncome();
     //personalBudget.addExpense();
     //personalBudget.addExpense();
-    personalBudget.displayIncomesFromCurrentMonth();
-    personalBudget.displayIncomesFromPreviousMonth();
+    //personalBudget.displayIncomesFromCurrentMonth();
+    //personalBudget.displayIncomesFromPreviousMonth();
     //personalBudget.displayIncomesFromChosenPeriod();
-    personalBudget.displayExpensesFromCurrentMonth();
-    personalBudget.displayExpensesFromPreviousMonth();
+    //personalBudget.displayExpensesFromCurrentMonth();
+    //personalBudget.displayExpensesFromPreviousMonth();
+    //personalBudget.displayBalanceFromCurrentMonth();
+    //personalBudget.displayBalanceFromPreviousMonth();
+    personalBudget.displayBalanceFromChosenPeriod();
     //personalBudget.displayExpensesFromChosenPeriod();
 }

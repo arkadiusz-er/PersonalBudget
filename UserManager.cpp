@@ -74,8 +74,9 @@ void UserManager::userLogging() {
 
                 if (users[i].getPassword() == password) {
                     cout << endl << "Logged in." << endl << endl;
-                    system("pause");
+                    //system("pause");
                     loggedUserId = users[i].getUserId();
+                    Sleep(1500);
                     return;
                 }
             }
@@ -85,7 +86,8 @@ void UserManager::userLogging() {
         }
     }
     cout << "Entered login doesn't exist. Please try again." << endl << endl;
-    system("pause");
+    //system("pause");
+    Sleep(1500);
     system("cls");
     userLogging();
 }

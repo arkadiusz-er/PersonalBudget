@@ -43,6 +43,10 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENSES(fileNameWit
     void displayExpensesFromCurrentMonth();
     void displayExpensesFromPreviousMonth();
     void displayExpensesFromChosenPeriod();
+
+    void displayBalanceFromCurrentMonth();
+    void displayBalanceFromPreviousMonth();
+    void displayBalanceFromChosenPeriod();
     //char wybierzOpcjeZMenuGlownego();
     //char wybierzOpcjeZMenuUzytkownika();
     //bool czyUzytkownikJestZalogowany();
