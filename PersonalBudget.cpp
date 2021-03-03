@@ -190,3 +190,11 @@ char PersonalBudget::chooseOptionFromUserMenu() {
 void PersonalBudget::changePasswordLoggedUser() {
     userManager.changePasswordLoggedUser();
 }
+
+void PersonalBudget::userLogOut() {
+    userManager.userLogOut();
+    delete incomeManager;
+    delete expenseManager;
+    incomeManager = NULL;
+    expenseManager = NULL;
+}

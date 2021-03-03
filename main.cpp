@@ -49,7 +49,7 @@ int main()
                 personalBudget.changePasswordLoggedUser();
                 break;
             case '7':
-                //personalBudget.zmianaHaslaZalogowanegoUzytkownika();
+                personalBudget.userLogOut();
                 break;
             }
         }

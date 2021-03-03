@@ -34,7 +34,7 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENSES(fileNameWit
     void addIncome();
     void addExpense();
     void changePasswordLoggedUser();
-    //void wylogowanieUzytkownika();
+    void userLogOut();
     void displayIncomes();
     void displayIncomesFromCurrentMonth();
     void displayIncomesFromPreviousMonth();

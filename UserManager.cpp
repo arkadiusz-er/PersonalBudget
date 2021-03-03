@@ -126,6 +126,9 @@ void UserManager::changePasswordLoggedUser() {
             system("pause");
         }
     }
-    //plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
     fileWithUsers.saveAllUsersToFile(users);
+}
+
+void UserManager::userLogOut() {
+    loggedUserId = 0;
 }

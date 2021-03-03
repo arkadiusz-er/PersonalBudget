@@ -32,7 +32,7 @@ public:
     int getLoggedUserId();
     void changePasswordLoggedUser();
     bool checkIfUserIsLogged();
-    //void wylogowanieUzytkownika();
+    void userLogOut();
 };
 
 #endif
