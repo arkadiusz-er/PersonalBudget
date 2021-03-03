@@ -1,6 +1,7 @@
 #include "UserManager.h"
 
 void UserManager::userRegistration() {
+    system("cls");
     User user = giveNewUserData();
 
     users.push_back(user);
@@ -59,6 +60,7 @@ bool UserManager::checkIfLoginExists(string login) {
 }
 
 void UserManager::userLogging() {
+    system("cls");
     User user;
     string login = "", password = "";
     cout << "Log in" << endl;
@@ -78,6 +80,8 @@ void UserManager::userLogging() {
                     loggedUserId = users[i].getUserId();
                     Sleep(1500);
                     return;
+                } else if (users[i].getPassword() != password && numberOfAttempts > 1) {
+                    cout << "Incorrect password. ";
                 }
             }
             cout << "The password has been entered three times incorrectly." << endl;
@@ -86,7 +90,6 @@ void UserManager::userLogging() {
         }
     }
     cout << "Entered login doesn't exist. Please try again." << endl << endl;
-    //system("pause");
     Sleep(1500);
     system("cls");
     userLogging();
@@ -109,4 +112,20 @@ bool UserManager::checkIfUserIsLogged() {
         return true;
     else
         return false;
+}
+
+void UserManager::changePasswordLoggedUser() {
+    string newPassword = "";
+    cout << "Type in a new password: ";
+    newPassword = AuxiliaryMethods::loadLine();
+
+    for (int i = 0; i < users.size(); i++) {
+        if (users[i].getUserId() == loggedUserId) {
+            users[i].setPassword(newPassword);
+            cout << "The password has been changed." << endl << endl;
+            system("pause");
+        }
+    }
+    //plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
+    fileWithUsers.saveAllUsersToFile(users);
 }

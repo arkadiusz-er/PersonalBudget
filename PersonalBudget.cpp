@@ -90,6 +90,7 @@ void PersonalBudget::displayBalanceFromCurrentMonth() {
         cout << "Sum of expenses is: " << expenseManager->getSumOfExpenses() << endl;
         cout << "Balance is: " << (incomeManager->getSumOfIncomes()) - (expenseManager->getSumOfExpenses()) << endl;
         cout << "-----------------------------" << endl;
+        system("pause");
     }
 }
 
@@ -105,6 +106,7 @@ void PersonalBudget::displayBalanceFromPreviousMonth() {
         cout << "Sum of expenses is: " << expenseManager->getSumOfExpenses() << endl;
         cout << "Balance is: " << (incomeManager->getSumOfIncomes()) - (expenseManager->getSumOfExpenses()) << endl;
         cout << "-----------------------------" << endl;
+        system("pause");
     }
 }
 
@@ -114,12 +116,12 @@ void PersonalBudget::displayBalanceFromChosenPeriod() {
         string firstDate = "";
         string secondDate = "";
         cout << "Type in date of begining (YYYY-MM-DD): "; cin >> firstDate;
-        while (AuxiliaryMethods::checkIfDataIsCorrect(firstDate) == false) {
+        while (AuxiliaryMethods::checkIfDateIsCorrect(firstDate) == false) {
             cout << "Type in date of beginning (YYYY-MM-DD): "; cin >> firstDate;
         }
         int firstDateAsInteger = AuxiliaryMethods::changeDateToInteger(firstDate);
         cout << "Type in date of ending (YYYY-MM-DD): "; cin >> secondDate;
-        while (AuxiliaryMethods::checkIfDataIsCorrect(secondDate) == false) {
+        while (AuxiliaryMethods::checkIfDateIsCorrect(secondDate) == false) {
             cout << "Type in date of ending (YYYY-MM-DD): "; cin >> secondDate;
         }
         int secondDateAsInteger = AuxiliaryMethods::changeDateToInteger(secondDate);
@@ -139,6 +141,52 @@ void PersonalBudget::displayBalanceFromChosenPeriod() {
         cout << "Sum of expenses is: " << expenseManager->getSumOfExpenses() << endl;
         cout << "Balance is: " << (incomeManager->getSumOfIncomes()) - (expenseManager->getSumOfExpenses()) << endl;
         cout << "-----------------------------" << endl;
+        system("pause");
 
     }
+}
+
+bool PersonalBudget::checkIfUserIsLogged() {
+    userManager.checkIfUserIsLogged();
+}
+
+char PersonalBudget::chooseOptionFromMainMenu() {
+    char choice;
+
+    system("cls");
+    cout << "    >>> MAIN MENU <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Sign up" << endl;
+    cout << "2. Log in" << endl;
+    cout << "9. Exit" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Your choice: ";
+    choice = AuxiliaryMethods::loadSign();
+
+    return choice;
+}
+
+char PersonalBudget::chooseOptionFromUserMenu() {
+    char choice;
+
+    system("cls");
+    cout << " >>> USER MENU <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Add income" << endl;
+    cout << "2. Add expense" << endl;
+    cout << "3. Display balance from current month" << endl;
+    cout << "4. Display balance from previous month" << endl;
+    cout << "5. Display balance from chosen period" << endl;
+    cout << "---------------------------" << endl;
+    cout << "6. Change a password" << endl;
+    cout << "7. Log out" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Your choice: ";
+    choice = AuxiliaryMethods::loadSign();
+
+    return choice;
+}
+
+void PersonalBudget::changePasswordLoggedUser() {
+    userManager.changePasswordLoggedUser();
 }

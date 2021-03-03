@@ -30,7 +30,7 @@ public:
     void loadUsersFromFile();
     void setLoggedUserId(int newUserId);
     int getLoggedUserId();
-    //void zmianaHaslaZalogowanegoUzytkownika();
+    void changePasswordLoggedUser();
     bool checkIfUserIsLogged();
     //void wylogowanieUzytkownika();
 };

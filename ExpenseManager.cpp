@@ -37,7 +37,7 @@ Expense ExpenseManager::typeInNewExpense() {
     } else if (userReply == 'N') {
         cout << "Type in a date (YYYY-MM-DD): ";
         date = AuxiliaryMethods::loadLine();
-        while (AuxiliaryMethods::checkIfDataIsCorrect(date) == false) {
+        while (AuxiliaryMethods::checkIfDateIsCorrect(date) == false) {
             cout << "Type in a date (YYYY-MM-DD): ";
             date = AuxiliaryMethods::loadLine();
         }
@@ -86,7 +86,7 @@ void ExpenseManager::displayExpensesFromCurrentMonth() {
     int numberOfSearchedExpenses = 0;
     sumOfExpenses = 0;
     cout << "     EXPENSES     " << endl;
-    cout << "------------------" << endl;
+    cout << "-----------------------------------" << endl;
     if (!expenses.empty()) {
         for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++) {
             if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
@@ -97,6 +97,7 @@ void ExpenseManager::displayExpensesFromCurrentMonth() {
                 }
         }
         cout << endl;
+        if (sumOfExpenses == 0) cout << "In this period there isn't any item." << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }
@@ -106,7 +107,7 @@ void ExpenseManager::displayExpensesFromPreviousMonth() {
     int numberOfSearchedExpenses = 0;
     sumOfExpenses = 0;
     cout << "     EXPENSES     " << endl;
-    cout << "------------------" << endl;
+    cout << "-----------------------------------" << endl;
     if (!expenses.empty()) {
         int searchedMonthInt = 0;
         int searchedYearInt = 0;
@@ -129,6 +130,7 @@ void ExpenseManager::displayExpensesFromPreviousMonth() {
                 }
         }
         cout << endl;
+        if (sumOfExpenses == 0) cout << "In this period there isn't any item." << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }
@@ -148,7 +150,7 @@ void ExpenseManager::displayExpensesFromChosenPeriod(int firstDate, int secondDa
     if (!expenses.empty()) {
 
         cout << "     EXPENSES     " << endl;
-        cout << "------------------" << endl;
+        cout << "-----------------------------------" << endl;
 
         for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++) {
             int dateFromVectorAsInteger = AuxiliaryMethods::changeDateToInteger(itr->getDate());
@@ -160,6 +162,7 @@ void ExpenseManager::displayExpensesFromChosenPeriod(int firstDate, int secondDa
                 }
             }
         cout << endl;
+        if (sumOfExpenses == 0) cout << "In this period there isn't any item."  << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }

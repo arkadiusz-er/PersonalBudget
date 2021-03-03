@@ -37,7 +37,7 @@ Income IncomeManager::typeInNewIncome() {
     } else if (userReply == 'N') {
         cout << "Type in a date (YYYY-MM-DD): ";
         date = AuxiliaryMethods::loadLine();
-        while (AuxiliaryMethods::checkIfDataIsCorrect(date) == false) {
+        while (AuxiliaryMethods::checkIfDateIsCorrect(date) == false) {
             cout << "Type in a date (YYYY-MM-DD): ";
             date = AuxiliaryMethods::loadLine();
         }
@@ -87,7 +87,7 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
     int numberOfSearchedIncomes = 0;
     sumOfIncomes = 0;
     cout << "     INCOMES     " << endl;
-    cout << "-----------------" << endl;
+    cout << "-----------------------------------" << endl;
     if (!incomes.empty()) {
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
@@ -98,6 +98,7 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
                 }
         }
         cout << endl;
+        if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -107,7 +108,7 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
     int numberOfSearchedIncomes = 0;
     sumOfIncomes = 0;
     cout << "     INCOMES     " << endl;
-    cout << "-----------------" << endl;
+    cout << "-----------------------------------" << endl;
     if (!incomes.empty()) {
         int searchedMonthInt = 0;
         int searchedYearInt = 0;
@@ -130,6 +131,7 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
                 }
         }
         cout << endl;
+        if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -147,7 +149,7 @@ void IncomeManager::displayIncomesFromChosenPeriod(int firstDate, int secondDate
     sumOfIncomes = 0;
     if (!incomes.empty()) {
         cout << "     INCOMES     " << endl;
-        cout << "-----------------" << endl;
+        cout << "-----------------------------------" << endl;
 
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             int dateFromVectorAsInteger = AuxiliaryMethods::changeDateToInteger(itr->getDate());
@@ -159,6 +161,7 @@ void IncomeManager::displayIncomesFromChosenPeriod(int firstDate, int secondDate
                 }
         }
         cout << endl;
+        if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
