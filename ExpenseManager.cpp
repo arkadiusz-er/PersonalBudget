@@ -37,7 +37,7 @@ Expense ExpenseManager::typeInNewExpense() {
     } else if (userReply == 'N') {
         cout << "Type in a date (YYYY-MM-DD): ";
         date = AuxiliaryMethods::loadLine();
-        while (AuxiliaryMethods::checkIfDataIsCorrect(date) == false) {
+        while (AuxiliaryMethods::checkIfDateIsCorrect(date) == false) {
             cout << "Type in a date (YYYY-MM-DD): ";
             date = AuxiliaryMethods::loadLine();
         }
@@ -61,7 +61,7 @@ Expense ExpenseManager::typeInNewExpense() {
 
 void ExpenseManager::displayExpenses() {
     system("cls");
-    double sumOfExpenses = 0;
+    sumOfExpenses = 0;
     cout << "                >>> EXPENSES <<<" << endl;
     cout << "-----------------------------------------------" << endl;
     if (!expenses.empty()) {
@@ -69,7 +69,6 @@ void ExpenseManager::displayExpenses() {
             displayExpenseData(*itr);
             sumOfExpenses += itr->getAmount();
         }
-        cout << endl << "Sum of expenses: " << sumOfExpenses << endl;
     } else {
         cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }
@@ -77,43 +76,47 @@ void ExpenseManager::displayExpenses() {
 }
 
 void ExpenseManager::displayExpenseData(Expense expense) {
-    cout << endl << "ExpenseId:  " << expense.getExpenseId() << endl;
-    cout << "Date:      " << expense.getDate() << endl;
+    //cout << endl << "ExpenseId:  " << expense.getExpenseId() << endl;
+    cout << endl << "Date:      " << expense.getDate() << endl;
     cout << "Item:      " << expense.getItem() << endl;
     cout << "Amount:    " << expense.getAmount() << endl;
 }
 
 void ExpenseManager::displayExpensesFromCurrentMonth() {
-    system("cls");
     int numberOfSearchedExpenses = 0;
-    double sumOfExpenses = 0;
-    cout << "      >>> EXPENSES FROM CURRENT MONTH <<<" << endl;
-    cout << "-----------------------------------------------" << endl;
+    sumOfExpenses = 0;
+    cout << "     EXPENSES     " << endl;
+    cout << "-----------------------------------" << endl;
     if (!expenses.empty()) {
+        vector <Expense> sortedExpenses;
         for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++) {
             if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
                 itr->getDate().substr(5,2) == AuxiliaryMethods::getCurrentMonth()) {
-                    displayExpenseData(*itr);
-                    numberOfSearchedExpenses++;
-                    sumOfExpenses += itr->getAmount();
+                    sortedExpenses.push_back(*itr);
                 }
         }
-        cout << endl;
-        displayNumberSearchedExpenses(numberOfSearchedExpenses);
-        cout << "Sum of expenses: " << sumOfExpenses << endl << endl;
+        if (!sortedExpenses.empty()) {
+            sort(sortedExpenses.begin(), sortedExpenses.end(), compareDates);
+            for (vector <Expense> :: iterator itr2 = sortedExpenses.begin(); itr2 != sortedExpenses.end(); itr2++) {
+                displayExpenseData(*itr2);
+                sumOfExpenses += itr2->getAmount();
+            }
+            cout << endl;
+        } else {
+            if (sumOfExpenses == 0) cout << "In this period there isn't any item."  << endl << endl;
+        }
     } else {
         cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }
-    system("pause");
 }
 
 void ExpenseManager::displayExpensesFromPreviousMonth() {
-    system("cls");
     int numberOfSearchedExpenses = 0;
-    double sumOfExpenses = 0;
-    cout << "      >>> EXPENSES FROM PREVIOUS MONTH <<<" << endl;
-    cout << "-----------------------------------------------" << endl;
+    sumOfExpenses = 0;
+    cout << "     EXPENSES     " << endl;
+    cout << "-----------------------------------" << endl;
     if (!expenses.empty()) {
+        vector <Expense> sortedExpenses;
         int searchedMonthInt = 0;
         int searchedYearInt = 0;
         string today = AuxiliaryMethods::getTodaysDate();
@@ -129,18 +132,22 @@ void ExpenseManager::displayExpensesFromPreviousMonth() {
         for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++) {
             if (itr->getDate().substr(0,4) == searchedYearString &&
                 itr->getDate().substr(5,2) == searchedMonthString) {
-                    displayExpenseData(*itr);
-                    numberOfSearchedExpenses++;
-                    sumOfExpenses += itr->getAmount();
+                    sortedExpenses.push_back(*itr);
                 }
         }
-        cout << endl;
-        displayNumberSearchedExpenses(numberOfSearchedExpenses);
-        cout << "Sum of expenses: " << sumOfExpenses << endl << endl;
+        if (!sortedExpenses.empty()) {
+            sort(sortedExpenses.begin(), sortedExpenses.end(), compareDates);
+            for (vector <Expense> :: iterator itr2 = sortedExpenses.begin(); itr2 != sortedExpenses.end(); itr2++) {
+                displayExpenseData(*itr2);
+                sumOfExpenses += itr2->getAmount();
+            }
+            cout << endl;
+        } else {
+            if (sumOfExpenses == 0) cout << "In this period there isn't any item."  << endl << endl;
+        }
     } else {
         cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }
-    system("pause");
 }
 
 void ExpenseManager::displayNumberSearchedExpenses(int numberOfSearchedExpenses) {
@@ -150,40 +157,47 @@ void ExpenseManager::displayNumberSearchedExpenses(int numberOfSearchedExpenses)
         cout << "Number of expenses is: " << numberOfSearchedExpenses << endl;
 }
 
-void ExpenseManager::displayExpensesFromChosenPeriod() {
-    system("cls");
+void ExpenseManager::displayExpensesFromChosenPeriod(int firstDate, int secondDate) {
+    //system("cls");
     int numberOfSearchedExpenses = 0;
-    double sumOfExpenses = 0;
+    sumOfExpenses = 0;
     if (!expenses.empty()) {
-        string firstDate = "";
-        string secondDate = "";
-        cout << "Type in data of begining (YYYY-MM-DD): "; cin >> firstDate;
-        cout << "Type in date of ending (YYYY-MM-DD): "; cin >> secondDate;
-        AuxiliaryMethods::checkIfDataIsCorrect(firstDate);
-        AuxiliaryMethods::checkIfDataIsCorrect(secondDate);
+        vector <Expense> sortedExpenses;
+        cout << "     EXPENSES     " << endl;
+        cout << "-----------------------------------" << endl;
 
-        cout << endl << " >>> EXPENSES FROM " << firstDate << " TO " << secondDate << " <<<" << endl;
-        cout << "-----------------------------------------------" << endl;
-
-        int firstDateAsInteger = AuxiliaryMethods::changeDateToInteger(firstDate);
-        int secondDateAsInteger = AuxiliaryMethods::changeDateToInteger(secondDate);
-
-        if (firstDateAsInteger <= secondDateAsInteger) {
-            for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++) {
-                int dateFromVectorAsInteger = AuxiliaryMethods::changeDateToInteger(itr->getDate());
-                if (dateFromVectorAsInteger >= firstDateAsInteger &&
-                    dateFromVectorAsInteger <= secondDateAsInteger) {
-                        displayExpenseData(*itr);
-                        numberOfSearchedExpenses++;
-                        sumOfExpenses += itr->getAmount();
-                    }
+        for (vector <Expense> :: iterator itr = expenses.begin(); itr != expenses.end(); itr++) {
+            int dateFromVectorAsInteger = AuxiliaryMethods::changeDateToInteger(itr->getDate());
+            if (dateFromVectorAsInteger >= firstDate &&
+                dateFromVectorAsInteger <= secondDate) {
+                    sortedExpenses.push_back(*itr);
+                }
             }
-        cout << endl;
-        displayNumberSearchedExpenses(numberOfSearchedExpenses);
-        cout << "Sum of expenses: " << sumOfExpenses << endl << endl;
+        if (!sortedExpenses.empty()) {
+            sort(sortedExpenses.begin(), sortedExpenses.end(), compareDates);
+            for (vector <Expense> :: iterator itr2 = sortedExpenses.begin(); itr2 != sortedExpenses.end(); itr2++) {
+                displayExpenseData(*itr2);
+                sumOfExpenses += itr2->getAmount();
+            }
+            cout << endl;
         } else {
-            cout << endl << "There isn't any item in file with expenses." << endl << endl;
+            if (sumOfExpenses == 0) cout << "In this period there isn't any item."  << endl << endl;
         }
-    system("pause");
+    } else {
+        cout << endl << "There isn't any item in file with expenses." << endl << endl;
     }
 }
+
+
+void ExpenseManager::setSumOfExpenses(double newSumOfExpenses) {
+    if (newSumOfExpenses >= 0) sumOfExpenses = newSumOfExpenses;
+}
+
+double ExpenseManager::getSumOfExpenses() {
+    return sumOfExpenses;
+}
+
+bool ExpenseManager::compareDates(Expense &date1, Expense &date2) {
+    return AuxiliaryMethods::changeDateToInteger(date1.getDate()) < AuxiliaryMethods::changeDateToInteger(date2.getDate());
+}
+

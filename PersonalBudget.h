@@ -28,13 +28,13 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENSES(fileNameWit
         incomeManager = NULL;
         expenseManager = NULL;
     }
+    bool checkIfUserIsLogged();
     void userRegistration();
     void userLogging();
     void addIncome();
     void addExpense();
-    //int pobierzIdZalogowanegoUzytkownika();
-    //void zmianaHaslaZalogowanegoUzytkownika();
-    //void wylogowanieUzytkownika();
+    void changePasswordLoggedUser();
+    void userLogOut();
     void displayIncomes();
     void displayIncomesFromCurrentMonth();
     void displayIncomesFromPreviousMonth();
@@ -43,7 +43,13 @@ FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENSES(fileNameWit
     void displayExpensesFromCurrentMonth();
     void displayExpensesFromPreviousMonth();
     void displayExpensesFromChosenPeriod();
-    //char wybierzOpcjeZMenuGlownego();
+
+    void displayBalanceFromCurrentMonth();
+    void displayBalanceFromPreviousMonth();
+    void displayBalanceFromChosenPeriod();
+
+    char chooseOptionFromMainMenu();
+    char chooseOptionFromUserMenu();
     //char wybierzOpcjeZMenuUzytkownika();
     //bool czyUzytkownikJestZalogowany();
 };

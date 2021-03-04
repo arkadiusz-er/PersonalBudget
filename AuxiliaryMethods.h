@@ -12,6 +12,7 @@ class AuxiliaryMethods {
 public:
     static string convertIntToString(int number);
     static string convertDoubleToString(double number);
+    static char loadSign();
     static string loadLine();
     static string replaceFirstLetterToCapitalRestToLower(string text);
     static int convertStringToInt(string number);
@@ -22,7 +23,7 @@ public:
     static string getCurrentMonth();
     static string getCurrentDay();
     static string checkIfOneSignInDate(string x);
-    static bool checkIfDataIsCorrect (string dateToChecking);
+    static bool checkIfDateIsCorrect (string dateToChecking);
 
     static int changeDateToInteger (string dataToChange);
     static string changeIntegerToDate(int dateAsInteger);

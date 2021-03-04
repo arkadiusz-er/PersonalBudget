@@ -5,8 +5,7 @@ void FileWithUsers::addUserToFile(User user) {
     CMarkup xmlFile;
     bool fileExists = xmlFile.Load(getFileName());
 
-    if (!fileExists)
-    {
+    if (!fileExists) {
         xmlFile.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
         xmlFile.AddElem("users");
     }
@@ -33,8 +32,7 @@ vector <User> FileWithUsers::loadUsersFromFile() {
     xmlFile.Load(getFileName());
 
     xmlFile.FindElem();
-    while ( xmlFile.FindChildElem("user") )
-    {
+    while ( xmlFile.FindChildElem("user") ) {
         xmlFile.IntoElem();
         xmlFile.FindChildElem( "userId" );
         user.setUserId(AuxiliaryMethods::convertStringToInt(xmlFile.GetChildData()));
@@ -51,4 +49,22 @@ vector <User> FileWithUsers::loadUsersFromFile() {
     }
 
     return users;
+}
+
+void FileWithUsers::saveAllUsersToFile(vector <User> &users) {
+
+    CMarkup xmlFile;
+    xmlFile.Load(getFileName());
+    xmlFile.FindElem();
+    int i = 0;
+    while ( xmlFile.FindChildElem("user") ) {
+        xmlFile.IntoElem();
+        xmlFile.FindChildElem( "password" );
+        if (xmlFile.GetChildData() != users[i].getPassword()) {
+            xmlFile.SetChildData(users[i].getPassword());
+        }
+        i++;
+        xmlFile.OutOfElem();
+    }
+    xmlFile.Save(getFileName());
 }

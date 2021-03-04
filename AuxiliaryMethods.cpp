@@ -30,6 +30,22 @@ double AuxiliaryMethods::convertStringToDouble(string number) {
     return numberDouble;
 }
 
+char AuxiliaryMethods::loadSign() {
+    string wejscie = "";
+    char znak  = {0};
+
+    while (true) {
+        getline(cin, wejscie);
+
+        if (wejscie.length() == 1) {
+            znak = wejscie[0];
+            break;
+        }
+        cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
+    }
+    return znak;
+}
+
 string AuxiliaryMethods::loadLine() {
     string enteredData = "";
     cin.sync();
@@ -86,7 +102,7 @@ string AuxiliaryMethods::checkIfOneSignInDate(string x) {
     return x;
 }
 
-bool AuxiliaryMethods::checkIfDataIsCorrect (string dateToChecking) {
+bool AuxiliaryMethods::checkIfDateIsCorrect (string dateToChecking) {
     SYSTEMTIME st;
     GetSystemTime(&st);
 
@@ -105,10 +121,10 @@ bool AuxiliaryMethods::checkIfDataIsCorrect (string dateToChecking) {
                 return true;
             }
         } else {
-            cout << "This date is incorrect.";
+            cout << "This date is incorrect. Please try again.";
         }
     } else
-        cout << "Incorrect format of data.";
+        cout << "Incorrect format of data. Please try again.";
     cout << endl << endl;
     return false;
 }
@@ -131,3 +147,5 @@ string AuxiliaryMethods::changeCommaIfExistsToDot(string amountString) {
     }
     return amountString;
 }
+
+
