@@ -89,16 +89,23 @@ void IncomeManager::displayIncomesFromCurrentMonth() {
     cout << "     INCOMES     " << endl;
     cout << "-----------------------------------" << endl;
     if (!incomes.empty()) {
+        vector <Income> sortedIncomes;
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             if (itr->getDate().substr(0,4) == AuxiliaryMethods::getCurrentYear() &&
                 itr->getDate().substr(5,2) == AuxiliaryMethods::getCurrentMonth()) {
-                    displayIncomeData(*itr);
-                    numberOfSearchedIncomes++;
-                    sumOfIncomes += itr->getAmount();
+                    sortedIncomes.push_back(*itr);
                 }
         }
-        cout << endl;
-        if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
+        if (!sortedIncomes.empty()) {
+            sort(sortedIncomes.begin(), sortedIncomes.end(), compareDates);
+            for (vector <Income> :: iterator itr2 = sortedIncomes.begin(); itr2 != sortedIncomes.end(); itr2++) {
+                displayIncomeData(*itr2);
+                sumOfIncomes += itr2->getAmount();
+            }
+            cout << endl;
+        } else {
+            if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
+        }
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -110,6 +117,7 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
     cout << "     INCOMES     " << endl;
     cout << "-----------------------------------" << endl;
     if (!incomes.empty()) {
+        vector <Income> sortedIncomes;
         int searchedMonthInt = 0;
         int searchedYearInt = 0;
         string today = AuxiliaryMethods::getTodaysDate();
@@ -125,13 +133,19 @@ void IncomeManager::displayIncomesFromPreviousMonth() {
         for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++) {
             if (itr->getDate().substr(0,4) == searchedYearString &&
                 itr->getDate().substr(5,2) == searchedMonthString) {
-                    displayIncomeData(*itr);
-                    numberOfSearchedIncomes++;
-                    sumOfIncomes += itr->getAmount();
+                    sortedIncomes.push_back(*itr);
                 }
         }
-        cout << endl;
-        if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
+        if (!sortedIncomes.empty()) {
+            sort(sortedIncomes.begin(), sortedIncomes.end(), compareDates);
+            for (vector <Income> :: iterator itr2 = sortedIncomes.begin(); itr2 != sortedIncomes.end(); itr2++) {
+                displayIncomeData(*itr2);
+                sumOfIncomes += itr2->getAmount();
+            }
+            cout << endl;
+        } else {
+            if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
+        }
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -148,6 +162,7 @@ void IncomeManager::displayIncomesFromChosenPeriod(int firstDate, int secondDate
     int numberOfSearchedIncomes = 0;
     sumOfIncomes = 0;
     if (!incomes.empty()) {
+        vector <Income> sortedIncomes;
         cout << "     INCOMES     " << endl;
         cout << "-----------------------------------" << endl;
 
@@ -155,13 +170,19 @@ void IncomeManager::displayIncomesFromChosenPeriod(int firstDate, int secondDate
             int dateFromVectorAsInteger = AuxiliaryMethods::changeDateToInteger(itr->getDate());
             if (dateFromVectorAsInteger >= firstDate &&
                 dateFromVectorAsInteger <= secondDate) {
-                    displayIncomeData(*itr);
-                    numberOfSearchedIncomes++;
-                    sumOfIncomes += itr->getAmount();
+                    sortedIncomes.push_back(*itr);
                 }
         }
-        cout << endl;
-        if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
+        if (!sortedIncomes.empty()) {
+            sort(sortedIncomes.begin(), sortedIncomes.end(), compareDates);
+            for (vector <Income> :: iterator itr2 = sortedIncomes.begin(); itr2 != sortedIncomes.end(); itr2++) {
+                displayIncomeData(*itr2);
+                sumOfIncomes += itr2->getAmount();
+            }
+            cout << endl;
+        } else {
+            if (sumOfIncomes == 0) cout << "In this period there isn't any item."  << endl << endl;
+        }
     } else {
         cout << endl << "There isn't any item in file with incomes." << endl << endl;
     }
@@ -174,4 +195,8 @@ void IncomeManager::setSumOfIncomes(double newSumOfIncomes) {
 
 double IncomeManager::getSumOfIncomes() {
     return sumOfIncomes;
+}
+
+bool IncomeManager::compareDates(Income &date1, Income &date2) {
+    return AuxiliaryMethods::changeDateToInteger(date1.getDate()) < AuxiliaryMethods::changeDateToInteger(date2.getDate());
 }

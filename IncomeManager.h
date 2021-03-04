@@ -5,6 +5,7 @@
 #include <vector>
 #include <windows.h>
 #include <sstream>
+#include <algorithm>
 
 #include "Income.h"
 #include "FileWithIncomes.h"
@@ -20,6 +21,7 @@ class IncomeManager {
     Income typeInNewIncome();
     void displayIncomeData(Income income);
     void displayNumberSearchedIncomes(int numberOfSearchedIncomes);
+    static bool compareDates(Income &date1, Income &date2);
 
 public:
     IncomeManager(string fileNameWithIncomes, int loggedUserId)

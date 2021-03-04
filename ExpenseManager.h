@@ -20,6 +20,7 @@ class ExpenseManager {
     Expense typeInNewExpense();
     void displayExpenseData(Expense expense);
     void displayNumberSearchedExpenses(int numberOfSearchedExpenses);
+    static bool compareDates(Expense &date1, Expense &date2);
 
 public:
     ExpenseManager(string fileNameWithExpenses, int loggedUserId)
