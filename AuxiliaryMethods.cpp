@@ -148,4 +148,8 @@ string AuxiliaryMethods::changeCommaIfExistsToDot(string amountString) {
     return amountString;
 }
 
+char AuxiliaryMethods::replaceToCapitalLetter(char letter) {
+    letter = toupper(letter);
+    return letter;
+}
 

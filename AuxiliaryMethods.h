@@ -28,6 +28,7 @@ public:
     static int changeDateToInteger (string dataToChange);
     static string changeIntegerToDate(int dateAsInteger);
     static string changeCommaIfExistsToDot(string amountString);
+    static char replaceToCapitalLetter(char letter);
 };
 
 #endif

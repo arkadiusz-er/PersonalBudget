@@ -27,6 +27,7 @@ Expense ExpenseManager::typeInNewExpense() {
     char userReply;
     cout << "Does expense concern today? (y/n) ";
     cin >> userReply;
+    userReply = AuxiliaryMethods::replaceToCapitalLetter(userReply);
     while (userReply != 'Y' && userReply != 'N') {
         cout << "Incorrect sign. Please choose from Y or N. ";
         cin >> userReply;

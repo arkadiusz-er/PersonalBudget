@@ -27,6 +27,7 @@ Income IncomeManager::typeInNewIncome() {
     char userReply;
     cout << "Does income concern today? (y/n) ";
     cin >> userReply;
+    userReply = AuxiliaryMethods::replaceToCapitalLetter(userReply);
     while (userReply != 'Y' && userReply != 'N') {
         cout << "Incorrect sign. Please choose from Y or N. ";
         cin >> userReply;
